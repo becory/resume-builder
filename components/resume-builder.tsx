@@ -10,11 +10,20 @@ import SkillsForm from "@/components/skills-form";
 import ResumePreview from "@/components/resume-preview";
 import { Download } from "lucide-react";
 import { generatePDF } from "@/lib/pdf-generator";
-import { useResumeData } from "@/hooks/use-resume-data";
 import type { ResumeData } from "@/hooks/use-resume-data";
 
-export default function ResumeBuilder() {
-  const { resumeData, setResumeData } = useResumeData();
+interface ResumeBuilderProps {
+  resumeData: ResumeData;
+  setResumeData: (
+    key: keyof ResumeData,
+    value: ResumeData[keyof ResumeData]
+  ) => void;
+}
+
+export default function ResumeBuilder({
+  resumeData,
+  setResumeData,
+}: ResumeBuilderProps) {
   const [activeTab, setActiveTab] = useState("personal");
 
   const updatePersonalDetails = (

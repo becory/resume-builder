@@ -1,10 +1,4 @@
-import {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useRef,
-  useSyncExternalStore,
-} from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 
 export type ResumeData = {
   personalDetails: {
