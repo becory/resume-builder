@@ -14,9 +14,14 @@ import { Badge } from "@/components/ui/badge";
 interface UrlsFormProps {
   urls: ResumeData["personalDetails"]["urls"];
   updateUrls: (urls: ResumeData["personalDetails"]["urls"]) => void;
+  disabled?: boolean;
 }
 
-export default function UrlsForm({ urls, updateUrls }: UrlsFormProps) {
+export default function UrlsForm({
+  urls,
+  updateUrls,
+  disabled,
+}: UrlsFormProps) {
   const [formData, setFormData] = useState(urls);
   const [newType, setNewType] = useState("");
   const [newUrl, setNewUrl] = useState("");
@@ -63,6 +68,7 @@ export default function UrlsForm({ urls, updateUrls }: UrlsFormProps) {
                 id="type"
                 value={newType}
                 onChange={(e) => setNewType(e.target.value)}
+                disabled={disabled}
               >
                 <option value="">Select Type</option>
                 <option value="github">Github</option>
@@ -75,8 +81,9 @@ export default function UrlsForm({ urls, updateUrls }: UrlsFormProps) {
                 onChange={(e) => setNewUrl(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="e.g., JavaScript, Project Management, Customer Service"
+                disabled={disabled}
               />
-              <Button type="button" onClick={addUrl}>
+              <Button type="button" onClick={addUrl} disabled={disabled}>
                 Add
               </Button>
             </div>
@@ -98,6 +105,7 @@ export default function UrlsForm({ urls, updateUrls }: UrlsFormProps) {
                       size="icon"
                       className="h-4 w-4 ml-1 -mr-1 text-muted-foreground hover:text-foreground"
                       onClick={() => removeUrl(Url.url)}
+                      disabled={disabled}
                     >
                       <X className="h-3 w-3" />
                     </Button>

@@ -18,6 +18,7 @@ interface EducationFormProps {
   updateEducation: (education: ResumeData["education"]) => void;
   onNext: () => void;
   onPrevious: () => void;
+  disabled?: boolean;
 }
 
 export default function EducationForm({
@@ -25,6 +26,7 @@ export default function EducationForm({
   updateEducation,
   onNext,
   onPrevious,
+  disabled,
 }: EducationFormProps) {
   const [formData, setFormData] = useState(education);
   const [expanded, setExpanded] = useState<string | null>(
@@ -101,6 +103,7 @@ export default function EducationForm({
                         e.stopPropagation();
                         removeEducation(edu.id);
                       }}
+                      disabled={disabled}
                     >
                       <Trash2 className="w-4 h-4 text-destructive" />
                     </Button>
@@ -119,6 +122,7 @@ export default function EducationForm({
                             handleChange(edu.id, "institution", e.target.value)
                           }
                           placeholder="University of California"
+                          disabled={disabled}
                         />
                       </div>
 
@@ -132,6 +136,7 @@ export default function EducationForm({
                               handleChange(edu.id, "degree", e.target.value)
                             }
                             placeholder="Bachelor of Science"
+                            disabled={disabled}
                           />
                         </div>
 
@@ -146,6 +151,7 @@ export default function EducationForm({
                               handleChange(edu.id, "field", e.target.value)
                             }
                             placeholder="Computer Science"
+                            disabled={disabled}
                           />
                         </div>
                       </div>
@@ -162,6 +168,7 @@ export default function EducationForm({
                             onChange={(e) =>
                               handleChange(edu.id, "startDate", e.target.value)
                             }
+                            disabled={disabled}
                           />
                         </div>
 
@@ -174,7 +181,7 @@ export default function EducationForm({
                             onChange={(e) =>
                               handleChange(edu.id, "endDate", e.target.value)
                             }
-                            disabled={edu.current}
+                            disabled={edu.current || disabled}
                           />
                         </div>
                       </div>
@@ -186,6 +193,7 @@ export default function EducationForm({
                           onCheckedChange={(checked) =>
                             handleChange(edu.id, "current", Boolean(checked))
                           }
+                          disabled={disabled}
                         />
                         <label
                           htmlFor={`current-${edu.id}`}
@@ -207,6 +215,7 @@ export default function EducationForm({
                           }
                           placeholder="Notable achievements, coursework, or activities"
                           rows={4}
+                          disabled={disabled}
                         />
                       </div>
                     </div>
@@ -218,7 +227,12 @@ export default function EducationForm({
                 <p className="text-muted-foreground mb-4">
                   No education entries added yet
                 </p>
-                <Button type="button" variant="outline" onClick={addEducation}>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={addEducation}
+                  disabled={disabled}
+                >
                   Add Your First Education
                 </Button>
               </div>
@@ -230,6 +244,7 @@ export default function EducationForm({
                 variant="outline"
                 onClick={addEducation}
                 className="w-full flex items-center justify-center gap-2"
+                disabled={disabled}
               >
                 <Plus className="w-4 h-4" />
                 Add Another Education

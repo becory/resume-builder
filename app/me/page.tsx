@@ -6,7 +6,7 @@ import { PlusCircle } from "lucide-react";
 import { ResumeData } from "@/hooks/use-resume-data";
 import { useRouter } from "next/navigation";
 
-export default function Home() {
+export default function Me() {
   const router = useRouter();
 
   const handleCreate = () => {
@@ -144,7 +144,11 @@ export default function Home() {
           </Button>
         </div>
       </div>
-      <ResumeBuilder resumeData={resumeData} setResumeData={setResumeData} />
+      <ResumeBuilder
+        resumeData={resumeData}
+        setResumeData={setResumeData}
+        disabled
+      />
     </main>
   );
 }

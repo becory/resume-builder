@@ -18,11 +18,13 @@ interface ResumeBuilderProps {
     key: keyof ResumeData,
     value: ResumeData[keyof ResumeData]
   ) => void;
+  disabled?: boolean;
 }
 
 export default function ResumeBuilder({
   resumeData,
   setResumeData,
+  disabled,
 }: ResumeBuilderProps) {
   const [activeTab, setActiveTab] = useState("personal");
 
@@ -75,6 +77,7 @@ export default function ResumeBuilder({
               personalDetails={resumeData.personalDetails}
               updatePersonalDetails={updatePersonalDetails}
               onNext={() => setActiveTab("experience")}
+              disabled={disabled}
             />
           </TabsContent>
           <TabsContent value="experience">
@@ -83,6 +86,7 @@ export default function ResumeBuilder({
               updateExperience={updateExperience}
               onNext={() => setActiveTab("education")}
               onPrevious={() => setActiveTab("personal")}
+              disabled={disabled}
             />
           </TabsContent>
           <TabsContent value="education">
@@ -91,6 +95,7 @@ export default function ResumeBuilder({
               updateEducation={updateEducation}
               onNext={() => setActiveTab("skills")}
               onPrevious={() => setActiveTab("experience")}
+              disabled={disabled}
             />
           </TabsContent>
           <TabsContent value="skills">
@@ -102,6 +107,7 @@ export default function ResumeBuilder({
               updateHighlights={updateHighlights}
               updateCertificates={updateCertificates}
               onPrevious={() => setActiveTab("education")}
+              disabled={disabled}
             />
           </TabsContent>
         </Tabs>

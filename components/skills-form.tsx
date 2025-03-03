@@ -22,6 +22,7 @@ interface SkillsFormProps {
   updateCertificates: (certificates: ResumeData["certificates"]) => void;
   updateHighlights: (highlights: ResumeData["highlights"]) => void;
   onPrevious: () => void;
+  disabled?: boolean;
 }
 
 export default function SkillsForm({
@@ -32,6 +33,7 @@ export default function SkillsForm({
   updateCertificates,
   updateHighlights,
   onPrevious,
+  disabled,
 }: SkillsFormProps) {
   const [formData, setFormData] = useState(skills);
   const [newSkill, setNewSkill] = useState("");
@@ -150,8 +152,9 @@ export default function SkillsForm({
                   onChange={(e) => setNewSkill(e.target.value)}
                   onKeyDown={handleKeyDown}
                   placeholder="e.g., JavaScript, Project Management, Customer Service"
+                  disabled={disabled}
                 />
-                <Button type="button" onClick={addSkill}>
+                <Button type="button" onClick={addSkill} disabled={disabled}>
                   Add
                 </Button>
               </div>
@@ -173,6 +176,7 @@ export default function SkillsForm({
                         size="icon"
                         className="h-4 w-4 ml-1 -mr-1 text-muted-foreground hover:text-foreground"
                         onClick={() => removeSkill(skill)}
+                        disabled={disabled}
                       >
                         <X className="h-3 w-3" />
                       </Button>
@@ -208,6 +212,7 @@ export default function SkillsForm({
                           e.stopPropagation();
                           removeCertificates(cert.id);
                         }}
+                        disabled={disabled}
                       >
                         <Trash2 className="w-4 h-4 text-destructive" />
                       </Button>
@@ -230,6 +235,7 @@ export default function SkillsForm({
                               )
                             }
                             placeholder="AWS"
+                            disabled={disabled}
                           />
                         </div>
 
@@ -242,7 +248,8 @@ export default function SkillsForm({
                               onChange={(e) =>
                                 handleChange(cert.id, "name", e.target.value)
                               }
-                              placeholder="AWS"
+                              placeholder="AWS Certified Solutions Architect"
+                              disabled={disabled}
                             />
                           </div>
                         </div>
@@ -263,6 +270,7 @@ export default function SkillsForm({
                                   e.target.value
                                 )
                               }
+                              disabled={disabled}
                             />
                           </div>
 
@@ -281,6 +289,7 @@ export default function SkillsForm({
                                   e.target.value
                                 )
                               }
+                              disabled={disabled}
                             />
                           </div>
                         </div>
@@ -294,6 +303,7 @@ export default function SkillsForm({
                               handleChange(cert.id, "url", e.target.value)
                             }
                             placeholder="URL"
+                            disabled={disabled}
                           />
                         </div>
                       </div>
@@ -309,6 +319,7 @@ export default function SkillsForm({
                     type="button"
                     variant="outline"
                     onClick={addCertificates}
+                    disabled={disabled}
                   >
                     Add Your First Certificates
                   </Button>
@@ -321,6 +332,7 @@ export default function SkillsForm({
                   variant="outline"
                   onClick={addCertificates}
                   className="w-full flex items-center justify-center gap-2"
+                  disabled={disabled}
                 >
                   <Plus className="w-4 h-4" />
                   Add Another Certificates
@@ -336,8 +348,13 @@ export default function SkillsForm({
                   onChange={(e) => setNewHighlights(e.target.value)}
                   onKeyDown={handleKeyDownHighlight}
                   placeholder="e.g., JavaScript|Project Management|Customer Service"
+                  disabled={disabled}
                 />
-                <Button type="button" onClick={addHighlight}>
+                <Button
+                  type="button"
+                  onClick={addHighlight}
+                  disabled={disabled}
+                >
                   Set HighLight
                 </Button>
               </div>
@@ -374,7 +391,11 @@ export default function SkillsForm({
                 Previous
               </Button>
 
-              <Button type="submit" className="flex items-center gap-2">
+              <Button
+                type="submit"
+                className="flex items-center gap-2"
+                disabled={disabled}
+              >
                 Save All
               </Button>
             </div>

@@ -18,12 +18,14 @@ interface PersonalDetailsFormProps {
     personalDetails: ResumeData["personalDetails"]
   ) => void;
   onNext: () => void;
+  disabled?: boolean;
 }
 
 export default function PersonalDetailsForm({
   personalDetails,
   updatePersonalDetails,
   onNext,
+  disabled,
 }: PersonalDetailsFormProps) {
   const [formData, setFormData] = useState(personalDetails);
 
@@ -73,6 +75,7 @@ export default function PersonalDetailsForm({
                 value={formData.fullName}
                 onChange={handleChange}
                 placeholder="John Doe"
+                disabled={disabled}
               />
             </div>
 
@@ -84,6 +87,7 @@ export default function PersonalDetailsForm({
                 value={formData.title}
                 onChange={handleChange}
                 placeholder="Frontend Developer"
+                disabled={disabled}
               />
             </div>
 
@@ -97,6 +101,7 @@ export default function PersonalDetailsForm({
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="john.doe@example.com"
+                  disabled={disabled}
                 />
               </div>
 
@@ -108,11 +113,16 @@ export default function PersonalDetailsForm({
                   value={formData.phone}
                   onChange={handleChange}
                   placeholder="(123) 456-7890"
+                  disabled={disabled}
                 />
               </div>
             </div>
             <div>
-              <UrlsForm urls={formData.urls} updateUrls={updatedUrls} />
+              <UrlsForm
+                urls={formData.urls}
+                updateUrls={updatedUrls}
+                disabled={disabled}
+              />
             </div>
             <div>
               <Label htmlFor="location">Location</Label>
@@ -122,6 +132,7 @@ export default function PersonalDetailsForm({
                 value={formData.location}
                 onChange={handleChange}
                 placeholder="San Francisco, CA"
+                disabled={disabled}
               />
             </div>
 
@@ -134,6 +145,7 @@ export default function PersonalDetailsForm({
                 onChange={handleChange}
                 placeholder="Briefly introduce yourself and highlight your key qualifications and career objectives."
                 rows={4}
+                disabled={disabled}
               />
             </div>
 

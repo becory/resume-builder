@@ -18,6 +18,7 @@ interface ExperienceFormProps {
   updateExperience: (experience: ResumeData["experience"]) => void;
   onNext: () => void;
   onPrevious: () => void;
+  disabled?: boolean;
 }
 
 export default function ExperienceForm({
@@ -25,6 +26,7 @@ export default function ExperienceForm({
   updateExperience,
   onNext,
   onPrevious,
+  disabled,
 }: ExperienceFormProps) {
   const [formData, setFormData] = useState(experience);
   const [expanded, setExpanded] = useState<string | null>(
@@ -101,6 +103,7 @@ export default function ExperienceForm({
                         e.stopPropagation();
                         removeExperience(exp.id);
                       }}
+                      disabled={disabled}
                     >
                       <Trash2 className="w-4 h-4 text-destructive" />
                     </Button>
@@ -117,6 +120,7 @@ export default function ExperienceForm({
                             handleChange(exp.id, "title", e.target.value)
                           }
                           placeholder="Senior Developer"
+                          disabled={disabled}
                         />
                       </div>
 
@@ -129,6 +133,7 @@ export default function ExperienceForm({
                             handleChange(exp.id, "company", e.target.value)
                           }
                           placeholder="Acme Inc."
+                          disabled={disabled}
                         />
                       </div>
 
@@ -141,6 +146,7 @@ export default function ExperienceForm({
                             handleChange(exp.id, "location", e.target.value)
                           }
                           placeholder="San Francisco, CA"
+                          disabled={disabled}
                         />
                       </div>
 
@@ -156,6 +162,7 @@ export default function ExperienceForm({
                             onChange={(e) =>
                               handleChange(exp.id, "startDate", e.target.value)
                             }
+                            disabled={disabled}
                           />
                         </div>
 
@@ -168,7 +175,7 @@ export default function ExperienceForm({
                             onChange={(e) =>
                               handleChange(exp.id, "endDate", e.target.value)
                             }
-                            disabled={exp.current}
+                            disabled={exp.current || disabled}
                           />
                         </div>
                       </div>
@@ -180,6 +187,7 @@ export default function ExperienceForm({
                           onCheckedChange={(checked) =>
                             handleChange(exp.id, "current", Boolean(checked))
                           }
+                          disabled={disabled}
                         />
                         <label
                           htmlFor={`current-${exp.id}`}
@@ -201,6 +209,7 @@ export default function ExperienceForm({
                           }
                           placeholder="Describe your responsibilities and achievements"
                           rows={4}
+                          disabled={disabled}
                         />
                       </div>
                     </div>
@@ -212,7 +221,12 @@ export default function ExperienceForm({
                 <p className="text-muted-foreground mb-4">
                   No work experience added yet
                 </p>
-                <Button type="button" variant="outline" onClick={addExperience}>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={addExperience}
+                  disabled={disabled}
+                >
                   Add Your First Job
                 </Button>
               </div>
@@ -224,6 +238,7 @@ export default function ExperienceForm({
                 variant="outline"
                 onClick={addExperience}
                 className="w-full flex items-center justify-center gap-2"
+                disabled={disabled}
               >
                 <Plus className="w-4 h-4" />
                 Add Another Job
